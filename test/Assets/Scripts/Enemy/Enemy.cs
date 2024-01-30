@@ -1,0 +1,148 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
+using TMPro;
+using DG.Tweening;
+
+public class Enemy : MonoBehaviour
+{
+    private StateMachine stateMachine;
+    private NavMeshAgent navMeshAgent;
+    private GameObject player;
+
+    private Vector3 lastKnownPos;
+
+    public NavMeshAgent Agent { get => navMeshAgent; }
+    public GameObject Player { get => player; }
+
+    public Vector3 LastKnownPos { get => lastKnownPos; set => lastKnownPos = value; }
+    [SerializeField] //debug
+    private string currentState;
+
+    public EnemyPath path;
+    
+    //enemy vision
+    public float sightDistance = 20f;
+    public float fieldOfView = 80f;
+    public float eyeHeight;
+
+    //enemy weapon
+    public Transform gun;
+    public float fireRate;
+
+    //enemy health
+    private float enemyMaxHealth = 100f;
+    private float enemyHealth;
+    [SerializeField]
+    FloatingHealthBar healthBar;
+
+    public GameObject gameManager;
+
+    //Damage numbers
+    public GameObject dmgNumbersPrefab;
+    public string dmgText;
+    public Canvas canvas;
+    //Transform initialTransfrom;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        stateMachine = GetComponent<StateMachine>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
+
+        stateMachine.Initialise();
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        enemyHealth = enemyMaxHealth;
+
+        healthBar.UpdateHealthBar(enemyHealth, enemyMaxHealth);
+
+        //initialTransfrom = canvas.transform;
+
+    }
+
+    private void Awake()
+    {
+        healthBar = GetComponentInChildren<FloatingHealthBar>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        CanSeePlayer();
+        CheckIfDie();
+
+        currentState = stateMachine.activeState.ToString();
+    }
+
+  
+
+    public void TakeDamage(float damageTaken)
+    {
+        enemyHealth -= damageTaken;
+        healthBar.UpdateHealthBar(enemyHealth, enemyMaxHealth);
+
+        //float x = Random.Range(initialTransfrom.position.x - 5, initialTransfrom.position.x + 5);
+        //float y = Random.Range(initialTransfrom.position.y - 5, initialTransfrom.position.y + 5);
+        //canvas.transform.position = new Vector3(x, y, x);
+
+        GameObject dmgNumbersInstance = Instantiate(dmgNumbersPrefab, canvas.transform);
+        dmgText = damageTaken.ToString();
+        dmgNumbersInstance.transform.GetChild(0).GetComponent<TextMeshProUGUI>().SetText(dmgText);
+
+        //canvas.transform.position = initialTransfrom.position;
+    }
+
+    void CheckIfDie()
+    {
+        if(enemyHealth <= 0)
+        {
+            //spawn explosion when die
+            GameObject explosion = GameObject.Instantiate(Resources.Load("Explosion") as GameObject, gameObject.transform.position, gameObject.transform.rotation);
+            Destroy(explosion, 2f);
+
+            //add to kills
+            gameManager.GetComponent<LevelInfo>().kills += 1;
+
+            //destroy enemy go
+            Destroy(gameObject);
+        }
+    }
+
+    public bool CanSeePlayer()
+    {
+        if(player != null)
+        {
+            //check if player is within sight distance
+            if (Vector3.Distance(transform.position, player.transform.position) < sightDistance)
+            {
+                Vector3 targetDirection = player.transform.position - transform.position - (Vector3.up * eyeHeight);
+
+                float angleToPlayer = Vector3.Angle(targetDirection, transform.forward);
+
+                //check if player is within fov
+                if(angleToPlayer >= -fieldOfView && angleToPlayer <= fieldOfView)
+                {
+                    Ray ray = new Ray(transform.position + (Vector3.up * eyeHeight), targetDirection);
+
+                    RaycastHit hitInfo = new RaycastHit();
+                    if(Physics.Raycast(ray, out hitInfo, sightDistance))
+                    {
+                        if(hitInfo.transform.gameObject == player)
+                        {
+                            Debug.DrawRay(ray.origin, ray.direction * sightDistance);
+
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+}
