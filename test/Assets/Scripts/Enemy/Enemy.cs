@@ -45,7 +45,7 @@ public class Enemy : MonoBehaviour
     public GameObject dmgNumbersPrefab;
     public string dmgText;
     public Canvas canvas;
-    float randomness = 10f;
+    float randomness = 20f;
 
     [Header("HitEffect")]
     public Material red;
@@ -142,7 +142,7 @@ public class Enemy : MonoBehaviour
                     {
                         if(hitInfo.transform.gameObject == player)
                         {
-                            Debug.DrawRay(ray.origin, ray.direction * sightDistance);
+                            //Debug.DrawRay(ray.origin, ray.direction * sightDistance);
 
                             return true;
                         }
