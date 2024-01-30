@@ -405,7 +405,7 @@ Transform:
   - {fileID: 5874909534956774229}
   - {fileID: 6814745196439206749}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &67036646300230257
 BoxCollider:
@@ -426,7 +426,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1.96, z: 1}
+  m_Size: {x: 1.05, y: 1.96, z: 1.05}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3609295506899033432
 MonoBehaviour:
@@ -449,6 +449,9 @@ MonoBehaviour:
   fireRate: 0.5
   healthBar: {fileID: 4579448820034812016}
   gameManager: {fileID: 0}
+  dmgNumbersPrefab: {fileID: 0}
+  dmgText: 
+  canvas: {fileID: 0}
 --- !u!195 &8603580319795083544
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -494,7 +497,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0

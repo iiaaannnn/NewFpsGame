@@ -142,9 +142,12 @@ public class Gun : MonoBehaviour
         //calc direction with spread
         Vector3 direction = fpsCam.transform.forward + new Vector3(x, y, 0);
 
+
         //raycast hit enemy
         if(Physics.Raycast(fpsCam.transform.position, direction, out rayHit, range, WhatIsEnemy))
         {
+            Debug.Log(rayHit.collider.gameObject.name);
+
             if (rayHit.collider.CompareTag("Enemy"))
             {
                 rayHit.collider.GetComponent<Enemy>().TakeDamage(damage);
