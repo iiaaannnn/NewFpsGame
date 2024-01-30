@@ -116,6 +116,8 @@ public class Enemy : MonoBehaviour
 
             //destroy enemy go
             Destroy(gameObject);
+
+            player.GetComponent<PlayerHealth>().RestoreHealth(10);
         }
     }
 
