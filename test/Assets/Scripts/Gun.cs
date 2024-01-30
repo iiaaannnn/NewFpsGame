@@ -51,6 +51,7 @@ public class Gun : MonoBehaviour
     float plasmaEffectTimer = 0.2f;
 
     float hitMarkerTimer = 0.1f;
+
     private void Awake()
     {
         bulletsLeft = magSize;
@@ -98,6 +99,7 @@ public class Gun : MonoBehaviour
                 hitMarkerTimer -= Time.deltaTime;
             }
         }
+    
     }
     private void MyInput()
     {

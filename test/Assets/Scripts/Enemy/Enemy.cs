@@ -45,7 +45,11 @@ public class Enemy : MonoBehaviour
     public GameObject dmgNumbersPrefab;
     public string dmgText;
     public Canvas canvas;
-    //Transform initialTransfrom;
+    float randomness = 10f;
+
+    [Header("HitEffect")]
+    public Material red;
+    public Material white;
 
     // Start is called before the first frame update
     void Start()
@@ -59,8 +63,6 @@ public class Enemy : MonoBehaviour
         enemyHealth = enemyMaxHealth;
 
         healthBar.UpdateHealthBar(enemyHealth, enemyMaxHealth);
-
-        //initialTransfrom = canvas.transform;
 
     }
 
@@ -82,18 +84,23 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damageTaken)
     {
+        //update health
         enemyHealth -= damageTaken;
         healthBar.UpdateHealthBar(enemyHealth, enemyMaxHealth);
 
-        //float x = Random.Range(initialTransfrom.position.x - 5, initialTransfrom.position.x + 5);
-        //float y = Random.Range(initialTransfrom.position.y - 5, initialTransfrom.position.y + 5);
-        //canvas.transform.position = new Vector3(x, y, x);
-
+        //damage numbers
         GameObject dmgNumbersInstance = Instantiate(dmgNumbersPrefab, canvas.transform);
+        float x = Random.Range(dmgNumbersInstance.transform.position.x - randomness, dmgNumbersInstance.transform.position.x + randomness);
+        float y = Random.Range(dmgNumbersInstance.transform.position.y - randomness, dmgNumbersInstance.transform.position.y + randomness);
+
+        dmgNumbersInstance.transform.position = new Vector3(x, y, 1);
+
         dmgText = damageTaken.ToString();
         dmgNumbersInstance.transform.GetChild(0).GetComponent<TextMeshProUGUI>().SetText(dmgText);
 
-        //canvas.transform.position = initialTransfrom.position;
+        //hit effect
+        gameObject.GetComponentInChildren<MeshRenderer>().material = red;
+        StartCoroutine(ChangeBackColor(gameObject));
     }
 
     void CheckIfDie()
@@ -143,6 +150,14 @@ public class Enemy : MonoBehaviour
         }
 
         return false;
+    }
+
+
+    public IEnumerator ChangeBackColor(GameObject enemy)
+    {
+        yield return new WaitForSeconds(0.06f);
+        enemy.GetComponentInChildren<MeshRenderer>().material = white;
+
     }
 
 }
