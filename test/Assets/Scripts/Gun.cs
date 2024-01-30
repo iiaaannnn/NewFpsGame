@@ -146,8 +146,6 @@ public class Gun : MonoBehaviour
         //raycast hit enemy
         if(Physics.Raycast(fpsCam.transform.position, direction, out rayHit, range, WhatIsEnemy))
         {
-            Debug.Log(rayHit.collider.gameObject.name);
-
             if (rayHit.collider.CompareTag("Enemy"))
             {
                 rayHit.collider.GetComponent<Enemy>().TakeDamage(damage);
@@ -183,8 +181,6 @@ public class Gun : MonoBehaviour
         readyToShoot = true;
         gunanim.SetBool("IsShooting", false);
         handGunanim.SetBool("IsShooting", false);
-
-
     }
 
     private void Reload()
