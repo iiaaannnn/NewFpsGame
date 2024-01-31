@@ -18,7 +18,9 @@ public class Gun : MonoBehaviour
 
     int bulletsLeft, bulletsShot;
 
-    bool Shooting, readyToShoot, reloading;
+    bool Shooting, readyToShoot;
+
+    public bool reloading;
 
     [Header("References")]
     public Camera fpsCam;
@@ -122,7 +124,8 @@ public class Gun : MonoBehaviour
             
         }
         
-        AttackPoint.SetActive(Shooting);
+
+        AttackPoint.SetActive(Shooting && !reloading);
 
         //reload
         if (Input.GetButtonDown("Reload") && bulletsLeft < magSize)

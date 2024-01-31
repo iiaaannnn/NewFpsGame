@@ -9,6 +9,7 @@ using DG.Tweening;
 
 public class Enemy : MonoBehaviour
 {
+    [Header("Nav Mesh")]
     private StateMachine stateMachine;
     private NavMeshAgent navMeshAgent;
     private GameObject player;
@@ -23,17 +24,17 @@ public class Enemy : MonoBehaviour
     private string currentState;
 
     public EnemyPath path;
-    
-    //enemy vision
+
+    [Header("Enemy Vision")]
     public float sightDistance = 20f;
     public float fieldOfView = 80f;
     public float eyeHeight;
 
-    //enemy weapon
+    [Header("Enemy Weapon")]
     public Transform gun;
     public float fireRate;
 
-    //enemy health
+    [Header("Enemy Health")]
     private float enemyMaxHealth = 100f;
     private float enemyHealth;
     [SerializeField]
@@ -41,7 +42,7 @@ public class Enemy : MonoBehaviour
 
     public GameObject gameManager;
 
-    //Damage numbers
+    [Header("Damage Numbers")]
     public GameObject dmgNumbersPrefab;
     public string dmgText;
     public Canvas canvas;

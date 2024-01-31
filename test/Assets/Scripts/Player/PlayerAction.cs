@@ -139,14 +139,21 @@ public class PlayerAction : MonoBehaviour
                 break;
         }
 
-        if(Input.GetButtonDown("Weapon1") && weaponNum != 1)
+
+        //switch weapon
+        if (!gun.GetComponent<Gun>().reloading)
         {
-            Weapon1();
+            if (Input.GetButtonDown("Weapon1") && weaponNum != 1)
+            {
+                Weapon1();
+            }
+            if (Input.GetButtonDown("Weapon2") && weaponNum != 2)
+            {
+                Weapon2();
+            }
         }
-        if (Input.GetButtonDown("Weapon2") && weaponNum != 2)
-        {
-            Weapon2();
-        }
+
+        
 
 
     }
