@@ -23,6 +23,10 @@ public class PauseMenu : MonoBehaviour
                 Time.timeScale = 0f;
                 paused = true;
             }
+            else
+            {
+                Resume();
+            }
         }
      
     }

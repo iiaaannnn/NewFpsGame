@@ -107,9 +107,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (gameObject.GetComponent<PlayerHealth>().GetHealth() <= 0)
+        {
+            return;
+        }
+
         //check if grounded
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
-
+     
         MyInput();
         SpeedControl();
         StateHandler();
