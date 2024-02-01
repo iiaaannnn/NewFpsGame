@@ -94,4 +94,9 @@ public class PlayerHealth : MonoBehaviour
         damageOverlay.SetActive(false);
 
     }
+
+    public float GetHealth()
+    {
+        return health;
+    }
 }

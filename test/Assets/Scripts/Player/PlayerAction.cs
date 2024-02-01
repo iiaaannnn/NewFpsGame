@@ -27,7 +27,7 @@ public class PlayerAction : MonoBehaviour
     [Header("Gun")]
     public GameObject gun;
     public GameObject handGun;
-    int weaponNum = 1;
+    public int weaponNum = 1;
     public Animator gunanim;
     public Animator handGunanim;
     public GameObject ammotext;
@@ -246,8 +246,14 @@ public class PlayerAction : MonoBehaviour
         fpsCam.sensX = 1000;
         fpsCam.sensY = 1000;
 
-        gunanim.SetBool("IsScoped", false);
-        handGunanim.SetBool("IsScoped", false);
+        if (gun.activeInHierarchy)
+        {
+            gunanim.SetBool("IsScoped", false);
+        }
+        if (handGun.activeInHierarchy)
+        {
+            handGunanim.SetBool("IsScoped", false);
+        }
     }
 
     private void Weapon1()

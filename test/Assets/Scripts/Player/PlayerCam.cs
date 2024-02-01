@@ -17,6 +17,7 @@ public class PlayerCam : MonoBehaviour
     float yRotation;
 
     public GameObject gameManager;
+    public GameObject player;
     public float sensitivityMultiplier = 1;
 
     // Start is called before the first frame update
@@ -29,6 +30,14 @@ public class PlayerCam : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        if(player.GetComponent<PlayerHealth>().GetHealth() <= 0)
+        {
+            return;
+        }
+        UpdateCamera();
+    }
+    void UpdateCamera()
     {
         sensitivityMultiplier = gameManager.GetComponent<SettingsMenu>().sensitivity / 50;
 
@@ -44,7 +53,6 @@ public class PlayerCam : MonoBehaviour
         camHolder.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
     }
-
     public void DoFov(float endValue)
     {
         GetComponent<Camera>().DOFieldOfView(endValue, 0.25f);

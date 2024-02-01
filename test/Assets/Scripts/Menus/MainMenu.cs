@@ -10,9 +10,15 @@ public class MainMenu : MonoBehaviour
 
     float waitTime = 0.01f;
 
+    private void Start()
+    {
+        Time.timeScale = 0.75f;
+    }
+
     //MAIN MENU
     public void OnStartGame()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(1);
     }
 

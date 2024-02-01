@@ -5,6 +5,7 @@ using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 
 using TMPro;
+using System.Net.Http.Headers;
 
 public class Gun : MonoBehaviour
 {
@@ -40,7 +41,7 @@ public class Gun : MonoBehaviour
 
     public GameObject pauseMenu;
     public GameObject settingsMenu;
-
+    public GameObject player;
 
     [Header("Camera Shake")]
     public float shakeAmount = 0.7f;
@@ -67,7 +68,7 @@ public class Gun : MonoBehaviour
     private void Update()
     {
         ammoText.SetText(bulletsLeft + "/" + magSize);
-
+        
         MyInput();
 
         if (shakeDuration > 0)
@@ -116,7 +117,7 @@ public class Gun : MonoBehaviour
         }
 
         //shoot
-        if(readyToShoot && Shooting && !reloading && bulletsLeft > 0 && !pauseMenu.activeInHierarchy && !settingsMenu.activeInHierarchy)
+        if(readyToShoot && Shooting && !reloading && bulletsLeft > 0 && !pauseMenu.activeInHierarchy && !settingsMenu.activeInHierarchy && player.GetComponent<PlayerHealth>().GetHealth() > 0)
         {
             bulletsShot = bulletsPerTap;
             Shoot();
@@ -175,17 +176,35 @@ public class Gun : MonoBehaviour
         {
             Invoke("Shoot", timeBetweenShots);
         }
-
-        gunanim.SetBool("IsShooting", true);
-        handGunanim.SetBool("IsShooting", true);
+        
+      
+        switch(player.GetComponent<PlayerAction>().weaponNum)
+        {
+            case 1:
+                gunanim.SetBool("IsShooting", true);
+                break;
+            case 2:
+                handGunanim.SetBool("IsShooting", true);
+                break;
+            default: break;
+        }
 
     }
 
     private void ResetShot() 
     {
         readyToShoot = true;
-        gunanim.SetBool("IsShooting", false);
-        handGunanim.SetBool("IsShooting", false);
+
+        switch (player.GetComponent<PlayerAction>().weaponNum)
+        {
+            case 1:
+                gunanim.SetBool("IsShooting", false);
+                break;
+            case 2:
+                handGunanim.SetBool("IsShooting", false);
+                break;
+            default: break;
+        }
     }
 
     private void Reload()

@@ -20,7 +20,7 @@ public class LevelInfo : MonoBehaviour
     void Start()
     {
         killsNeeded = currentLevel * 5;
-
+        Time.timeScale = 1f;
     }
 
     // Update is called once per frame
