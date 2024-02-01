@@ -236,9 +236,15 @@ public class PlayerAction : MonoBehaviour
         fpsCam.DoFov(30);
         fpsCam.sensX = 375;
         fpsCam.sensY = 375;
-
-        gunanim.SetBool("IsScoped", true);
-        handGunanim.SetBool("IsScoped", true);
+        
+        if(gun.activeInHierarchy)
+        {
+            gunanim.SetBool("IsScoped", true);
+        }
+        if(handGun.activeInHierarchy)
+        {
+            handGunanim.SetBool("IsScoped", true);
+        }
     }
     private void UnScope()
     {

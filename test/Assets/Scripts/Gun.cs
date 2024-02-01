@@ -210,8 +210,17 @@ public class Gun : MonoBehaviour
     private void Reload()
     {
         reloading = true;
-        gunanim.SetBool("Reload", true);
-        handGunanim.SetBool("Reload", true);
+
+        switch (player.GetComponent<PlayerAction>().weaponNum)
+        {
+            case 1:
+                gunanim.SetBool("Reload", true);
+                break;
+            case 2:
+                handGunanim.SetBool("Reload", true);
+                break;
+            default: break;
+        }
 
         Invoke("ReloadFinished", reloadTime);
         Invoke("ResetReloadAnim", reloadTime);
@@ -225,9 +234,18 @@ public class Gun : MonoBehaviour
 
     private void ResetReloadAnim()
     {
-        gunanim.SetBool("Reload", false );
-        handGunanim.SetBool("Reload", false);
- 
+
+        switch (player.GetComponent<PlayerAction>().weaponNum)
+        {
+            case 1:
+                gunanim.SetBool("Reload", false);
+                break;
+            case 2:
+                handGunanim.SetBool("Reload", false);
+                break;
+            default: break;
+        }
+
     }
 
 }
