@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class DeathScreen : MonoBehaviour
 {
     public GameObject deathScreen;
     public GameObject player;
+
     private void Update()
     {
         if (player.GetComponent<PlayerHealth>().GetHealth() <= 0)
@@ -15,8 +17,10 @@ public class DeathScreen : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;                                     
             Time.timeScale = 0.2f;
             deathScreen.SetActive(true);
+
         }
     }
+
     public void MainMenu()
     {
         Time.timeScale = 0.75f;

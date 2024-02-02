@@ -6,9 +6,16 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     bool paused = false;
+    public GameObject pauseMenuOverlay;
     public GameObject pauseMenu;
     public GameObject settingsMenu;
 
+    public Animator pauseAnim;
+
+    private void Start()
+    {
+        pauseMenuOverlay.SetActive(false);
+    }
     // Update is called once per frame
     void Update()
     {
@@ -18,10 +25,14 @@ public class PauseMenu : MonoBehaviour
             if(!paused)
             {
                 pauseMenu.SetActive(true);
+                pauseMenuOverlay.SetActive(true);
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
-                Time.timeScale = 0f;
+                pauseAnim.SetBool("IsOpen", true);
+
                 paused = true;
+
+                StartCoroutine(waitForAnimationOpen());
             }
             else
             {
@@ -33,18 +44,25 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        Time.timeScale = 1;
+        Time.timeScale = 1; 
 
         paused = false;
+        pauseMenuOverlay.SetActive(false);
+
+        pauseAnim.SetBool("IsOpen", false);
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
         pauseMenu.SetActive(false);
+
+
     }
 
     public void Settings()
     {
         settingsMenu.SetActive(true);
-        pauseMenu.SetActive(false);
+        //pauseMenu.SetActive(false);
 
     }
 
@@ -54,4 +72,11 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0.75f;
         SceneManager.LoadScene(0);
     }
+
+    IEnumerator waitForAnimationOpen()
+    {
+        yield return new WaitForSeconds(0.2f);
+        Time.timeScale = 0f;
+    }
+
 }

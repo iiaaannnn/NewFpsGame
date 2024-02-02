@@ -68,7 +68,7 @@ public class Gun : MonoBehaviour
     private void Update()
     {
         ammoText.SetText(bulletsLeft + "/" + magSize);
-        
+
         MyInput();
 
         if (shakeDuration > 0)
@@ -122,9 +122,9 @@ public class Gun : MonoBehaviour
             bulletsShot = bulletsPerTap;
             Shoot();
             shakeDuration = 0.1f;
-            
+
         }
-        
+
 
         AttackPoint.SetActive(Shooting && !reloading);
 
@@ -188,6 +188,7 @@ public class Gun : MonoBehaviour
                 break;
             default: break;
         }
+
 
     }
 

@@ -113,7 +113,7 @@ public class PlayerAction : MonoBehaviour
         switch (mode)
         {
             case 1:
-                if (Input.GetButton("Scope"))
+                if (Input.GetButton("Scope") && player.GetComponent<PlayerHealth>().GetHealth() > 0)
                 {
                     Scope();
                 }

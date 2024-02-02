@@ -9,11 +9,18 @@ public class ButtonEffect : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     RectTransform buttonRect;
     Button btn;
     float scaleAmount = 0.15f;
+    Vector3 initialScale;
+
     private void Start()
     {
         buttonRect = gameObject.GetComponent<RectTransform>();
         btn = gameObject.GetComponent<Button>();
         btn.onClick.AddListener(Select);
+        initialScale = buttonRect.localScale;
+    }
+    private void OnDisable()
+    {
+        buttonRect.localScale = initialScale;
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
