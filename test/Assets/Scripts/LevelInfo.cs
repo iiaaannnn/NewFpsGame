@@ -19,7 +19,7 @@ public class LevelInfo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        killsNeeded = currentLevel * 5;
+        killsNeeded = 11;
         Time.timeScale = 1f;
     }
 
