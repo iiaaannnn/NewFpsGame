@@ -12627,11 +12627,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   promptMessage: '[E] Talk'
   dialogue:
-    name: Ball
+  - name: Ball
     sentences:
-    - Hi im ball.
-    - AHHHHHHHHHHHHHHHHHHHH
-    - Go unalive some enemies
+    - "wopowepow\t"
+    - dfdfjdkjfdkjf
+    - vcnmvncmvncmnm
 --- !u!4 &790687234 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000011112872720, guid: 85a8865d1bf4a63478038fae23776de8, type: 3}

@@ -12,7 +12,7 @@ public class LevelInfo : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI killsText;
 
-    int currentLevel = 1;
+    //int currentLevel = 1;
 
     public GameObject levelDoor;
 

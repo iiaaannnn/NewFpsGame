@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DialogueTrigger : Interactable
 {
-    public Dialogue dialogue;
+    public Dialogue[] dialogue;
     bool triggeredDialogue = false;
 
     public void TriggerDialogue()
