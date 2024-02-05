@@ -26,8 +26,11 @@ public class PlayerCam : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-    } 
-
+    }
+    private void OnDestroy()
+    {
+        DOTween.KillAll();
+    }
     // Update is called once per frame
     void Update()
     {
