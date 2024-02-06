@@ -145,14 +145,14 @@ public class WallRunning : MonoBehaviour //mine
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
         //camera tilt
-        if(wallLeft)
-        {
-            cam.DoTilt(-5f);
-        }
-        if (wallRight)
-        {
-            cam.DoTilt(5f);
-        }
+        //if(wallLeft)
+        //{
+        //    cam.DoTilt(-5f);
+        //}
+        //if (wallRight)
+        //{
+        //    cam.DoTilt(5f);
+        //}
 
     }
 
@@ -191,7 +191,7 @@ public class WallRunning : MonoBehaviour //mine
     private void StopWallRun()
     {
         playerMovement.isWallRunning = false;
-        cam.DoTilt(0f);
+        //cam.DoTilt(0f);
     }
 
     private void WallJump()

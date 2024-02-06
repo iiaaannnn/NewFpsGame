@@ -234,7 +234,7 @@ public class PlayerAction : MonoBehaviour
 
     private void Scope()
     {
-        fpsCam.DoFov(30);
+        //fpsCam.DoFov(30);
 
         fpsCam.sensX = 375;
         fpsCam.sensY = 375;
@@ -252,7 +252,7 @@ public class PlayerAction : MonoBehaviour
     {
         if(fpsCam.GetComponent<Camera>().fieldOfView <= 80)
         {
-            fpsCam.DoFov(80);
+            //fpsCam.DoFov(80);
         }
 
         fpsCam.sensX = 1000;
