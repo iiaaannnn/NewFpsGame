@@ -56,6 +56,7 @@ public class PlayerAction : MonoBehaviour
 
     int abilityDamage = 10;
     float effectTimer = 1f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -234,7 +235,6 @@ public class PlayerAction : MonoBehaviour
     private void Scope()
     {
         fpsCam.DoFov(30);
-        //fpsCam.GetComponent<Camera>().fieldOfView = 30;
 
         fpsCam.sensX = 375;
         fpsCam.sensY = 375;
@@ -250,7 +250,7 @@ public class PlayerAction : MonoBehaviour
     }
     private void UnScope()
     {
-        if(fpsCam.GetComponent<Camera>().fieldOfView != 80)
+        if(fpsCam.GetComponent<Camera>().fieldOfView <= 80)
         {
             fpsCam.DoFov(80);
         }
